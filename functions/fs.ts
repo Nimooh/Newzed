@@ -36,30 +36,33 @@ export function generateUniqueId(datas : PostType[]) {
     return newId;
 }
 
-export async function addPostData(post : PostType) {
+
+
+export async function updatePost(post : PostType) {
     await ensureDirExists();
     const fileInfo = await FileSystem.getInfoAsync(dataFileUri);
     const fileContent = await FileSystem.readAsStringAsync(fileInfo.uri) 
     const datas = JSON.parse(fileContent);
-    if(post.image) {
-    post.image = getImageFileUri(post.image)
-    }
-    datas.push(post)
-    saveDatas(datas)
-}
-
-
-
-export async function ModifyPost(id: number,post : PostType) {
-    await ensureDirExists();
-    const fileInfo = await FileSystem.getInfoAsync(dataFileUri);
-    const fileContent = await FileSystem.readAsStringAsync(fileInfo.uri) 
-    const datas = JSON.parse(fileContent);
-    const index = datas.findIndex((x: { id: number; }) => x.id === id);
+    const index = datas.findIndex((x: { id: number; }) => x.id === post.id);
     if (index !== -1) {
         datas[index] = post; 
     } else {
-        datas.push(post);
+        datas.unshift(post);
+    }
+    
+    await saveDatas(datas);
+}
+
+export async function deletePost(post : PostType) {
+    await ensureDirExists();
+    const fileInfo = await FileSystem.getInfoAsync(dataFileUri);
+    const fileContent = await FileSystem.readAsStringAsync(fileInfo.uri) 
+    const datas = JSON.parse(fileContent);
+    const index = datas.findIndex((x: { id: number; }) => x.id === post.id);
+    if (index !== -1) {
+        datas.splice(index,1)
+    } else {
+        console.log("No post with this id")
     }
     
     await saveDatas(datas);
