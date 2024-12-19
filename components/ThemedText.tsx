@@ -5,29 +5,29 @@ const styles   = StyleSheet.create({
     headline: {
         fontWeight: "bold",
         fontSize: 24,
-        lineHeight: 32
+        lineHeight: 26
     },
     subtitle1: {
         fontWeight: "bold",
-        fontSize: 50,
-        lineHeight: 52
+        fontSize: 26,
+        lineHeight: 32
     },
     subtitle2: {
         fontWeight: "bold",
-        fontSize: 48,
-        lineHeight: 50
+        fontSize: 22,
+        lineHeight: 24
     },
     username : {
-        fontSize: 40,
-        lineHeight: 42
+        fontSize: 20,
+        lineHeight: 22
     },
     body: {
-        fontSize: 36,
-        lineHeight: 40
+        fontSize: 16,
+        lineHeight: 20
     },
     caption: {
-        fontSize: 30,
-        lineHeight: 32
+        fontSize: 10,
+        lineHeight: 12
     }
 })
 
