@@ -2,7 +2,7 @@
 
 ## Ruben Dunesme
 
-## Descriptopn
+## Description
 
 This project is a small project developed with React Native. It's an app called Newzed where you can post news. (Not connected to the internet)
 
