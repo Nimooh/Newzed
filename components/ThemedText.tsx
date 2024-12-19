@@ -22,12 +22,16 @@ const styles   = StyleSheet.create({
         lineHeight: 22
     },
     body: {
-        fontSize: 16,
-        lineHeight: 20
+        fontSize: 12,
+        lineHeight: 14
     },
     caption: {
         fontSize: 10,
         lineHeight: 12
+    },
+    button: {
+        fontSize: 18,
+        lineHeight: 20
     }
 })
 
