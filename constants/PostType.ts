@@ -1,6 +1,7 @@
-export type Post = {
+export type PostType = {
+    id?: number
     userId: number
     text?: string,
-    imgUri?: string,
+    image?: string,
     date: string
   }
