@@ -1,6 +1,6 @@
 import {  type ViewProps, type ViewStyle } from "react-native";
 import { useThemeColors } from "../hooks/useThemeColors";
-import { PostButton } from "./PostButton";
+import { PostButton } from "./post/PostButton";
 import { Row } from "./Row";
 
 type Props = ViewProps
