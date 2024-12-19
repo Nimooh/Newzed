@@ -30,8 +30,8 @@ const styles   = StyleSheet.create({
         lineHeight: 12
     },
     button: {
-        fontSize: 18,
-        lineHeight: 20
+        fontSize: 16,
+        lineHeight: 18
     }
 })
 
