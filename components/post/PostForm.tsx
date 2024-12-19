@@ -6,9 +6,10 @@ import { PostType } from "@/constants/PostType"
 import ImagePicker from "../ImagePicker"
 import { useState } from "react"
 import { Row } from "../Row"
-import { addPostData, getDatas } from "@/functions/fs"
+import {  generateUniqueId, getDatas, updatePost } from "@/functions/fs"
 import { setDatas } from "@/store/reducers/dataSlice"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
+import { RootState } from "@/store/store"
 
 type Props = {
     visible: boolean
@@ -20,19 +21,22 @@ type Props = {
 export function PostForm ({visible, setVisible ,post}: Props ){
     const colors = useThemeColors()
     const dispatch = useDispatch();
+    const datas = useSelector((state: RootState) => state.datas.datas);
     const [image, setImage] = useState<string | undefined>(post?.image)
     const [text, setText] = useState<string |undefined>(post?.text)
     const date = new Date()
-    
-    const addPost = (post : PostType) => {
+    const formatter = new Intl.DateTimeFormat('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' , day:'2-digit', month:'2-digit', year:'2-digit'});
+    const formattedDate = formatter.format(date);
+
+    const sendForm = (post : PostType) => {
         if(text){
             post.text = text
         }
         if(image){
             post.image = image
         }
-        addPostData(post).then(() => getDatas().then((datas)=> dispatch(setDatas(datas))))
-       
+        
+        updatePost(post).then(() => getDatas().then((datas)=> dispatch(setDatas(datas))))
     }
     return (
         
@@ -51,10 +55,11 @@ export function PostForm ({visible, setVisible ,post}: Props ){
                         <Row style={{flex:1, justifyContent:'flex-end'}}>
                             <Pressable 
                                 onPress={() => {
-                                    addPost(
+                                    sendForm(
                                     {
+                                        id: post?.id ? post.id : generateUniqueId(datas),
                                         userId: 1,
-                                        date: date.toDateString(),
+                                        date: formattedDate,
                                     
                                     })
                                     setVisible(false)
